@@ -10,14 +10,16 @@ def main():
     # create socket object
     clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # connct to server
+    # connect to server
     clientsocket.connect((host, port))
 
     # send data to socket
-    clientsocket.send('Hello I sent this.'.encode('UTF-8'))
+    while True:
+        msg = input('->')
+        clientsocket.send(msg.encode('UTF-8'))
 
-    # Receive 1024 bytes
-    print('SERVER: {}'.format(clientsocket.recv(1024).decode('UTF-8')))
+        # Receive 1024 bytes
+        print('SERVER: {}'.format(clientsocket.recv(1024).decode('UTF-8')))
 
     clientsocket.close()
 
